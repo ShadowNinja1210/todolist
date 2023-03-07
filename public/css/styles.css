@@ -1,0 +1,161 @@
+html {
+  background-color: #e4e9fd;
+  background-image: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd 50%);
+  min-height: 1000px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  color: #fff;
+  padding: 10px;
+}
+
+.box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+#heading {
+  background-color: #a683e3;
+  text-align: center;
+}
+
+.item {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+input:checked + p {
+  text-decoration: line-through;
+  text-decoration-color: #a683e3;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+}
+
+p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #4a4a4a;
+  letter-spacing: -0.05rem;
+}
+
+form.item {
+  text-align: center;
+  margin-left: 20px;
+}
+
+form.item > input:focus {
+  color: #4a4a4a;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+button {
+  border-color: transparent;
+  color: #a683e3;
+  background-color: white;
+  font-size: 3rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+button:hover {
+  text-shadow: 1px 1px 2px #c5b7de;
+}
+
+input[type="text"] {
+  text-align: center;
+  height: 60px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 313px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #a683e3;
+}
+
+::placeholder {
+  color: grey;
+  opacity: 1;
+}
+
+footer {
+  color: white;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* Checkbox */
+.check {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  appearance: none;
+  background-color: #bbb;
+  transition: all 0.3s;
+}
+
+.check::before {
+  content: "";
+  position: absolute;
+  border: solid #fff;
+  display: block;
+  width: 0.3em;
+  height: 0.6em;
+  border-width: 0 0.2em 0.2em 0;
+  z-index: 1;
+  opacity: 0;
+  right: calc(50% - 0.3em);
+  top: calc(50% - 0.6em);
+  transform: rotate(0deg);
+  transition: all 0.3s;
+  transform-origin: center center;
+}
+
+.check:checked {
+  animation: a 0.3s ease-in forwards;
+  background-color: #a683e3;
+}
+
+.check:checked::before {
+  opacity: 1;
+  transform: rotate(405deg);
+}
+
+@keyframes a {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(0.8) rotateY(180deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(360deg);
+  }
+}
