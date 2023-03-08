@@ -87,14 +87,14 @@ app.post("/delete", (req, res) => {
         console.log(err);
       });
   } else {
-    List.findById(checkedItemId)
+    List.findOne({ name: listName })
       .then((foundItem) => {
         console.log("The found item is " + foundItem);
       })
       .catch((err) => {
         console.log(err);
       });
-    List.findOneAndUpdate({ _id: checkedItemId }, { $pull: { itemList: { _id: checkedItemId } } })
+    List.findOneAndUpdate({ name: listName }, { $pull: { itemList: { _id: checkedItemId } } })
       .then(() => {
         console.log("Successfully deleted the checked item from " + listName);
         res.redirect("/" + listName);
