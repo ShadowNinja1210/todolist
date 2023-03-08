@@ -61,6 +61,7 @@ app.get("/", function (req, res) {
           .catch((err) => {
             console.log(err);
           });
+        res.redirect("/");
       }
       res.render("list", { listTitle: "Today", newListItems: docs });
     })
@@ -74,7 +75,7 @@ app.get("/", function (req, res) {
 app.post("/delete", (req, res) => {
   const checkedItemId = req.body.checkbox;
   console.log(checkedItemId);
-  const listName = req.body.listName;
+  const listName = _.capitalize(req.body.listName);
 
   if (listName === "Today") {
     Item.findByIdAndDelete(checkedItemId)
@@ -86,7 +87,14 @@ app.post("/delete", (req, res) => {
         console.log(err);
       });
   } else {
-    List.findByIdAndUpdate(checkedItemId, { $pull: { itemList: { _id: checkedItemId } } })
+    List.findById(checkedItemId)
+      .then((foundItem) => {
+        console.log("The found item is " + foundItem);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    List.findOneAndUpdate({ _id: checkedItemId }, { $pull: { itemList: { _id: checkedItemId } } })
       .then(() => {
         console.log("Successfully deleted the checked item from " + listName);
         res.redirect("/" + listName);
@@ -102,7 +110,6 @@ app.post("/delete", (req, res) => {
 app.post("/", function (req, res) {
   const newItemName = req.body.newItem;
   const listName = req.body.list;
-  console.log(listName + " Testing ");
   const item = new Item({
     itemName: newItemName,
   });
@@ -138,7 +145,6 @@ app.get("/:customListName", (req, res) => {
         res.redirect("/" + newListName);
         console.log("Successfully saved " + newListName + "'s items");
       } else {
-        console.log(foundList.name, foundList.itemsList);
         res.render("list", { listTitle: foundList.name, newListItems: foundList.itemList });
       }
     })
